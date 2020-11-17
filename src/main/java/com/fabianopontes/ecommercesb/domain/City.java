@@ -16,7 +16,7 @@ public class City implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private String nome;
+	private String name;
 	
 	@ManyToOne	
 	@JoinColumn(name="uf_id")
@@ -25,10 +25,10 @@ public class City implements Serializable {
 	public City() {
 	}
 
-	public City(Integer id, String nome, Uf uf) {
+	public City(Integer id, String name, Uf uf) {
 		super();
 		this.id = id;
-		this.nome = nome;
+		this.name = name;
 		this.uf = uf;
 	}
 
@@ -40,12 +40,12 @@ public class City implements Serializable {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Uf getUf() {

@@ -17,7 +17,7 @@ public class Uf implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private String nome;
+	private String name;
 	
 	@OneToMany(mappedBy="uf")
 	private List<City> cities = new ArrayList<>();
@@ -25,10 +25,10 @@ public class Uf implements Serializable {
 	public Uf() {
 	}
 
-	public Uf(Integer id, String nome) {
+	public Uf(Integer id, String name) {
 		super();
 		this.id = id;
-		this.nome = nome;
+		this.name = name;
 	}
 
 	public Integer getId() {
@@ -39,12 +39,12 @@ public class Uf implements Serializable {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public List<City> getCities() {
