@@ -1,14 +1,16 @@
 package com.fabianopontes.ecommercesb.domain.enums;
 
-public enum ClientType {
-	
-	PESSOAFISICA(1, "PF"),
-	PESSOAJURIDICA(2, "PJ");
+
+public enum PaymentState {
+
+	PENDING(1,"Pending"),
+	PAID(2,"Paid"),
+	CANCELED(3,"Canceled");
 	
 	private int cod;
 	private String description;
 	
-	private ClientType(int cod, String description) {
+	private PaymentState(int cod, String description) {
 		this.cod = cod;
 		this.description = description;
 	}
@@ -21,13 +23,13 @@ public enum ClientType {
 		return description;
 	}
 
-	public static ClientType toEnum(Integer cod) {
+	public static PaymentState toEnum(Integer cod) {
 		
 		if(cod == null) {
 			return null;
 		}
 		
-		for (ClientType x : ClientType.values()) {
+		for (PaymentState x : PaymentState.values()) {
 			if(cod.equals(x.getCod())) {
 				return x;
 			}
