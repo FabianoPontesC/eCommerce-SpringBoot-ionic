@@ -2,6 +2,8 @@ package com.fabianopontes.ecommercesb.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,12 +12,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class ClientOrder implements Serializable {
+public class Orderr implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -25,7 +28,7 @@ public class ClientOrder implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date instant; 
 	
-	@OneToOne(cascade=CascadeType.ALL, mappedBy="order")
+	@OneToOne(cascade=CascadeType.ALL, mappedBy="orderr")
 	private Payment payment;
 	
 	@ManyToOne
@@ -36,10 +39,13 @@ public class ClientOrder implements Serializable {
 	@JoinColumn(name="delivery_address_id")
 	private Address deliveryAddress;
 	
-	public ClientOrder() {
+	@OneToMany(mappedBy="id.orderr")
+	private Set<OrderItem> items = new HashSet<>();
+	
+	public Orderr() {
 	}
 
-	public ClientOrder(Integer id, Date instant, Client client, Address deliveryAddress) {
+	public Orderr(Integer id, Date instant, Client client, Address deliveryAddress) {
 		super();
 		this.id = id;
 		this.instant = instant;
@@ -86,7 +92,15 @@ public class ClientOrder implements Serializable {
 	public void setDeliveryAddress(Address deliveryAddress) {
 		this.deliveryAddress = deliveryAddress;
 	}
+	
+	public Set<OrderItem> getItems() {
+		return items;
+	}
 
+	public void setItems(Set<OrderItem> items) {
+		this.items = items;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -103,7 +117,7 @@ public class ClientOrder implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ClientOrder other = (ClientOrder) obj;
+		Orderr other = (Orderr) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -111,6 +125,6 @@ public class ClientOrder implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 	
 }

@@ -12,7 +12,8 @@ import com.fabianopontes.ecommercesb.domain.Address;
 import com.fabianopontes.ecommercesb.domain.Category;
 import com.fabianopontes.ecommercesb.domain.City;
 import com.fabianopontes.ecommercesb.domain.Client;
-import com.fabianopontes.ecommercesb.domain.ClientOrder;
+import com.fabianopontes.ecommercesb.domain.OrderItem;
+import com.fabianopontes.ecommercesb.domain.Orderr;
 import com.fabianopontes.ecommercesb.domain.Payment;
 import com.fabianopontes.ecommercesb.domain.PaymentWithBankSlip;
 import com.fabianopontes.ecommercesb.domain.PaymentWithCreditCard;
@@ -24,6 +25,7 @@ import com.fabianopontes.ecommercesb.repositories.AddressRepository;
 import com.fabianopontes.ecommercesb.repositories.CategoryRepository;
 import com.fabianopontes.ecommercesb.repositories.CityRepository;
 import com.fabianopontes.ecommercesb.repositories.ClientRepository;
+import com.fabianopontes.ecommercesb.repositories.OrderItemRepository;
 import com.fabianopontes.ecommercesb.repositories.OrderRepository;
 import com.fabianopontes.ecommercesb.repositories.PaymentRepository;
 import com.fabianopontes.ecommercesb.repositories.ProductRepository;
@@ -48,6 +50,8 @@ public class EcommercesbApplication implements CommandLineRunner {
 	private OrderRepository orderRepository;
 	@Autowired
 	private PaymentRepository paymentRepository;
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(EcommercesbApplication.class, args);
@@ -99,8 +103,8 @@ public class EcommercesbApplication implements CommandLineRunner {
 		
 		
 		  SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm"); 
-		  ClientOrder ord1 = new ClientOrder(null, sdf.parse("30/09/2017 10:32"), cli1, addr1); 
-		  ClientOrder ord2 = new ClientOrder(null, sdf.parse("10/10/2017 19:35"), cli1, addr2);
+		  Orderr ord1 = new Orderr(null, sdf.parse("30/09/2017 10:32"), cli1, addr1); 
+		  Orderr ord2 = new Orderr(null, sdf.parse("10/10/2017 19:35"), cli1, addr2);
 		  
 		  Payment pay1 = new PaymentWithCreditCard(null, PaymentState.PAID, ord1, 6);
 		  ord1.setPayment(pay1);
@@ -112,6 +116,19 @@ public class EcommercesbApplication implements CommandLineRunner {
 		  
 		  orderRepository.saveAll(Arrays.asList(ord1, ord2));
 		  paymentRepository.saveAll(Arrays.asList(pay1, pay2));
+		  
+		  OrderItem oi1 = new OrderItem(ord1, p1, 0.00, 1, 2000.00);
+		  OrderItem oi2 = new OrderItem(ord1, p3, 0.00, 2, 80.00);
+		  OrderItem oi3 = new OrderItem(ord2, p2, 100.00, 1, 800.00);
+		  
+		  ord1.getItems().addAll(Arrays.asList(oi1, oi2));
+		  ord2.getItems().addAll(Arrays.asList(oi3));
+		  
+		  p1.getItems().addAll(Arrays.asList(oi1));
+		  p2.getItems().addAll(Arrays.asList(oi3));
+		  p3.getItems().addAll(Arrays.asList(oi2));
+		  
+		  orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3));
 	}
 
 }
