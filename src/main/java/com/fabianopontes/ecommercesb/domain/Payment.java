@@ -14,7 +14,7 @@ import com.fabianopontes.ecommercesb.domain.enums.PaymentState;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-public class Payment implements Serializable {
+public abstract class Payment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -24,12 +24,12 @@ public class Payment implements Serializable {
 	@OneToOne
 	@JoinColumn(name="order_id")
 	@MapsId
-	private Order order;
+	private ClientOrder order;
 	
 	public Payment() {
 	}
 
-	public Payment(Integer id, PaymentState state, Order order) {
+	public Payment(Integer id, PaymentState state, ClientOrder order) {
 		super();
 		this.id = id;
 		this.state = state;
@@ -52,11 +52,11 @@ public class Payment implements Serializable {
 		this.state = state;
 	}
 
-	public Order getOrder() {
+	public ClientOrder getOrder() {
 		return order;
 	}
 
-	public void setOrder(Order order) {
+	public void setOrder(ClientOrder order) {
 		this.order = order;
 	}
 

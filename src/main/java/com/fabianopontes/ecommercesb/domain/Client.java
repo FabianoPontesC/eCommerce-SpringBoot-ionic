@@ -22,23 +22,24 @@ public class Client implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
 	private String email;
 	private String cpfOrCnpj;
 	private Integer type;
-	
+
 	@JsonManagedReference
-	@OneToMany(mappedBy="client")
+	@OneToMany(mappedBy = "client")
 	private List<Address> addresses = new ArrayList<>();
-	
+
 	@ElementCollection
-	@CollectionTable(name="PHONE")
-	private Set<String> phones = new HashSet<>(); 
-	
-	private List<Order> orders = new ArrayList<>();
-	
+	@CollectionTable(name = "PHONE")
+	private Set<String> phones = new HashSet<>();
+
+	@OneToMany(mappedBy = "client")
+	private List<ClientOrder> orders = new ArrayList<>();
+
 	public Client() {
 	}
 
@@ -106,12 +107,12 @@ public class Client implements Serializable {
 	public void setPhones(Set<String> phones) {
 		this.phones = phones;
 	}
-	
-	public List<Order> getOrders() {
+
+	public List<ClientOrder> getOrders() {
 		return orders;
 	}
 
-	public void setOrders(List<Order> orders) {
+	public void setOrders(List<ClientOrder> orders) {
 		this.orders = orders;
 	}
 
@@ -139,5 +140,5 @@ public class Client implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 }

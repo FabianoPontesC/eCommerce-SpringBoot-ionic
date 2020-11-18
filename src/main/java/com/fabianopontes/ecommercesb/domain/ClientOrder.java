@@ -8,30 +8,41 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
-public class Order implements Serializable {
+public class ClientOrder implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date instant; 
 	
-	@OneToOne(cascade=CascadeType.ALL, mappedBy="pedido")
+	@OneToOne(cascade=CascadeType.ALL, mappedBy="order")
 	private Payment payment;
+	
+	@ManyToOne
+	@JoinColumn(name="client_id")
 	private Client client;
+	
+	@ManyToOne
+	@JoinColumn(name="delivery_address_id")
 	private Address deliveryAddress;
 	
-	public Order() {
+	public ClientOrder() {
 	}
 
-	public Order(Integer id, Date instant, Payment payment, Client client, Address deliveryAddress) {
+	public ClientOrder(Integer id, Date instant, Client client, Address deliveryAddress) {
 		super();
 		this.id = id;
 		this.instant = instant;
-		this.payment = payment;
 		this.client = client;
 		this.deliveryAddress = deliveryAddress;
 	}
@@ -92,7 +103,7 @@ public class Order implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Order other = (Order) obj;
+		ClientOrder other = (ClientOrder) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

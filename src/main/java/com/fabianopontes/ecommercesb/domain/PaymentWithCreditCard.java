@@ -13,7 +13,7 @@ public class PaymentWithCreditCard extends Payment{
 	public PaymentWithCreditCard() {
 	}
 
-	public PaymentWithCreditCard(Integer id, PaymentState state, Order order, Integer installmentsNumber) {
+	public PaymentWithCreditCard(Integer id, PaymentState state, ClientOrder order, Integer installmentsNumber) {
 		super(id, state, order);
 		this.installmentsNumber = installmentsNumber;
 	}
