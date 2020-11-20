@@ -17,6 +17,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Orderr implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -28,9 +30,11 @@ public class Orderr implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date instant; 
 	
+	@JsonManagedReference
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="orderr")
 	private Payment payment;
 	
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name="client_id")
 	private Client client;
