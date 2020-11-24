@@ -62,6 +62,11 @@ public class EcommercesbApplication implements CommandLineRunner {
 		
 		Category cat1 = new Category(null, "Computing");
 		Category cat2 = new Category(null, "Office");
+		Category cat3 = new Category(null, "Bath");
+		Category cat4 = new Category(null, "Eletronics");
+		Category cat5 = new Category(null, "Garden");
+		Category cat6 = new Category(null, "Decoration");
+		Category cat7 = new Category(null, "Perfumary");
 		
 		Product p1 = new Product(null, "Computer", 2000.00);
 		Product p2 = new Product(null, "Printer", 800.00);
@@ -81,7 +86,7 @@ public class EcommercesbApplication implements CommandLineRunner {
 		City c2 = new City(null, "São Paulo", uf2);
 		City c3 = new City(null, "Campinas", uf2);
 		
-		categoryRepository.saveAll(Arrays.asList(cat1, cat2));
+		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7));
 		productRepository.saveAll(Arrays.asList(p1, p2, p3));
 
 		uf1.getCities().addAll(Arrays.asList(c1));
