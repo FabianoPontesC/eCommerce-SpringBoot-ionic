@@ -2,12 +2,21 @@ package com.fabianopontes.ecommercesb.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
 import com.fabianopontes.ecommercesb.domain.Category;
+
 
 public class CategoryDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
+	
+
+	@NotEmpty(message="Empty is not allowed")
+	@Length(min=5, max=80, message="You must fill in 5 to 80 characters ")
 	private String nome;
 	
 	public CategoryDTO() {
@@ -33,6 +42,4 @@ public class CategoryDTO implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	
 }
