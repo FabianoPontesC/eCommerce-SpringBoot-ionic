@@ -4,8 +4,7 @@ import java.io.Serializable;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-
-import org.hibernate.validator.constraints.Length;
+import javax.validation.constraints.Size;
 
 import com.fabianopontes.ecommercesb.domain.Client;
 
@@ -15,7 +14,7 @@ public class ClientDTO implements Serializable {
 	private Integer id;
 	
 	@NotEmpty(message="Empty is not allowed")
-	@Length(min=5, max=120, message="You must fill in 5 to 80 characters ")
+	@Size(min=5, max=120, message="You must fill in 5 to 80 characters ")
 	private String name;
 	
 	@NotEmpty(message="Empty is not allowed")
