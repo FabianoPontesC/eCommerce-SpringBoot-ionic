@@ -2,20 +2,41 @@ package com.fabianopontes.ecommercesb.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+import com.fabianopontes.ecommercesb.services.validation.ClientInsert;
+
+@ClientInsert
 public class ClientNewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@NotEmpty(message="Empty is not allowed")
+	@Size(min=5, max=120, message="You must fill in 5 to 80 characters ")
 	private String name;
+	
+	@NotEmpty(message="Empty is not allowed")
+	@Email(message="Invalid email")
 	private String email;
+	
+	@NotEmpty(message="Empty is not allowed")
 	private String cpfOrCnpj;
+	
 	private Integer type;
 	
+	@NotEmpty(message="Empty is not allowed")
 	private String address;
+	
+	@NotEmpty(message="Empty is not allowed")
 	private String number;
 	private String complement;
 	private String neighborhood;
+	
+	@NotEmpty(message="Empty is not allowed")
 	private String zip;
 	
+	@NotEmpty(message="Empty is not allowed")
 	private String telefone1;
 	private String telefone2;
 	private String telefone3;
