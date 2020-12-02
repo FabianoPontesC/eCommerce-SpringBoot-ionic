@@ -2,6 +2,8 @@ package com.fabianopontes.ecommercesb.dto;
 
 import java.io.Serializable;
 
+import com.fabianopontes.ecommercesb.domain.Product;
+
 public class ProductDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -12,6 +14,12 @@ public class ProductDTO implements Serializable {
 	public ProductDTO() {
 	}
 
+	public ProductDTO(Product obj) {
+		id = obj.getId();
+		name = obj.getName();
+		price = obj.getPrice();
+	}
+	
 	public Integer getId() {
 		return id;
 	}
