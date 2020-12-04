@@ -6,8 +6,10 @@ import javax.persistence.Entity;
 
 import com.fabianopontes.ecommercesb.domain.enums.PaymentState;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 @Entity
+@JsonTypeName("paymentWithBankSlip")
 public class PaymentWithBankSlip extends Payment {
 	private static final long serialVersionUID = 1L;	
 
